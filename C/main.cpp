@@ -1,10 +1,14 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "platform.h" 
 
 int main(int argc, char* argv[]) {
 	//今天学习到程序是如何开始运行的，例如当命令行调用./main.exe "./text.cpp"时，
 	// 会向主程序传递数个参数，第一个是传入参数的个数。而字符串将会被传递，例如argv[1]就是指向"./text.cpp"的指针
+
+
+	configureConsole();
 
 	std::string path;
 	std::ifstream input;
@@ -13,7 +17,7 @@ int main(int argc, char* argv[]) {
 
 		//使用命令行调用
 		path = argv[1];
-		input.open(argv[1]);
+		input.open(path);
 
 	}
 	else {
@@ -29,12 +33,14 @@ int main(int argc, char* argv[]) {
 
 	if (!input.is_open()) {
 
-		std::cerr << "Error: Cannot open file:" << path << std::endl
+		std::cerr << "Error: Cannot open file : " << path << std::endl
 			<< "错误，无法打开" << path << "路径下的文件。" << std::endl;
+
+		pauseBeforeExit();
 		return 1;
 
 	}
 
-
+	pauseBeforeExit();
 	return 0;
 }

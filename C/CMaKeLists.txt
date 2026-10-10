@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(mycc LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_executable(mycc
+    main.cpp
+)
+
+if(WIN32)
+    target_sources(mycc PRIVATE
+        platform_windows.cpp
+    )
+endif()
+
+if(MSVC)
+    target_compile_options(mycc PRIVATE /utf-8)
+endif()
